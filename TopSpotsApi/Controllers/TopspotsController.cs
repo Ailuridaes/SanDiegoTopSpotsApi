@@ -10,27 +10,20 @@ namespace TopSpotsApi.Controllers
 {
     public class TopspotsController : ApiController
     {
+        private Topspot[] Topspots;
+
+        public TopspotsController()
+        {
+            string jsonString = File.ReadAllText(@"D:\Dev\OCA\TopSpots\TopSpotsApi\TopSpotsApi\App_Data\topspots.json");
+
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            Topspots = JsonConvert.DeserializeObject<Topspot[]>(jsonString);
+        }
+
         // GET: api/Topspots
         public IEnumerable<Topspot> Get()
         {
-            //JObject o1 = JObject.Parse(File.ReadAllText(Server.MapPath("~/App_Data/topspots.json"));
-
-            // read JSON directly from a file
-            //using (streamreader file = new streamreader(server.mappath("~/app_data/topspots.json")))
-            //using (jsontextreader reader = new jsontextreader(file))
-            //{
-            //    jobject o2 = (jobject)jtoken.readfrom(reader);
-            //}
-            //return new string[] { "value1", "value2" };
-
-            string jsonString = File.ReadAllText(@"D:\Dev\OCA\TopSpots\TopSpotsApi\TopSpotsApi\App_Data\topspots.json");
-
-            //JsonSerializer serializer = new JsonSerializer();
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            //settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            Topspot[] topspots = JsonConvert.DeserializeObject<Topspot[]>(jsonString);
-
-            return topspots;
+            return Topspots;
         }
 
         // GET: api/Topspots/5
