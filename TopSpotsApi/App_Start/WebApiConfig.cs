@@ -13,6 +13,7 @@ namespace TopSpotsApi
         {
             // Web API configuration and services
             var policy = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(policy);
 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
